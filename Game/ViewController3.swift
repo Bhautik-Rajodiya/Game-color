@@ -7,23 +7,32 @@
 
 import UIKit
 
-class ViewController3: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
-    
-    
-    var fgColor = ["Red","Black","Blue","Orenge","Green","Purple","Yellow","Brown","cyan"]
-    var bgColor = ["Red","Black","Blue","Orenge","Green","Purple","Yellow","Brown","cyan"]
-    
-    let colorHelper :[String : UIColor] = ["Red" : UIColor.red,"Black" : UIColor.black,"Blue" : UIColor.blue,"Orenge" : UIColor.orange,"Green" : UIColor.green,"Purple" : UIColor.purple,"Yellow" : UIColor.yellow,"Brown" : UIColor.brown,"cyan" : UIColor.cyan]
+class ViewController3: UIViewController {
     
     @IBOutlet weak var timeLine: UIProgressView!
     @IBOutlet weak var colorBox: UICollectionView!
+    
+    var fgColor = ["Red","Black","Blue","Orenge","Green","Purple","Yellow","Brown","Cyan"]
+    var bgColor = ["Red","Black","Blue","Orenge","Green","Purple","Yellow","Brown","Cyan"]
+    var time = Timer()
+    
+    let colorHelper :[String : UIColor] = [
+        "Red" : UIColor.red,"Black" : UIColor.black,"Blue" : UIColor.blue,
+        "Orenge" : UIColor.orange,"Green" : UIColor.green,"Purple" : UIColor.purple,
+        "Yellow" : UIColor.yellow,"Brown" : UIColor.brown,"Cyan" : UIColor.cyan
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         logic()
         timeLine.progress = 1.0
         progress()
+        colorBox.layer.cornerRadius = 30
     }
+}
+
+
+extension ViewController3 : UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -35,7 +44,7 @@ class ViewController3: UIViewController,UICollectionViewDelegate,UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = colorBox.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MyCollectionViewCell
-        cell.layer.cornerRadius = 30
+        cell.layer.cornerRadius = 10
         cell.lb.text = fgColor[indexPath.row]
         cell.layer.backgroundColor = colorHelper[bgColor[indexPath.row]]?.cgColor
         return cell
@@ -49,24 +58,21 @@ class ViewController3: UIViewController,UICollectionViewDelegate,UICollectionVie
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         logic()
     }
+}
+ 
+
+extension ViewController3 {
     
     func logic(){
-        //fgColor=["Red","Black","Blue","Orenge","Green","Purple","Yellow","Brown","cyan"]
-        fgColor.shuffle()
-        let number = (0 ..< 9).randomElement()!
-        print("Number: \(number)")
-        
-        
         bgColor.shuffle()
         
-        var a : Bool = false
         
+        fgColor.shuffle()
+        var a : Bool = false
         repeat {
             a = false
-            for i in bgColor.indices
-            {
-                if bgColor[i] == fgColor[i]
-                {
+            for i in bgColor.indices {
+                if bgColor[i] == fgColor[i] {
                     a = true
                     fgColor.shuffle()
                     break
@@ -74,41 +80,34 @@ class ViewController3: UIViewController,UICollectionViewDelegate,UICollectionVie
             }
         } while a ;
         
-        let putBgColorInFg = bgColor[number]
+        
+        let ans = (0 ..< 9).randomElement()!
+        let putBgColorInFg = bgColor[ans]
+//        let j = (0..<9).first(where: { ind in  fgColor[ind] == putBgColorInFg })!
+        let newLocation = fgColor.firstIndex(of: putBgColorInFg) ?? 0
         
         
-        for j in 0..<9 {
-            if (fgColor[j]==putBgColorInFg) {
-                let backupColor = fgColor[number]
-                fgColor[number] = putBgColorInFg
-                
-                if bgColor[j]==backupColor {
-                    fgColor[j] = "amber"
-                }
-                else{
-                    fgColor[j]=backupColor
-                }
-                
-                print(fgColor)
-                print(backupColor)
-                print(putBgColorInFg)
-                break
-            }
+        //                Set Here V===================================deletedData
+        (fgColor[ans], fgColor[newLocation]) = (fgColor[newLocation],  fgColor[ans])
+        //                     ^newData
+        
+        
+        if bgColor[newLocation]==fgColor[newLocation] {
+            let special = Set(0..<9).subtracting([newLocation, ans]).randomElement()!
+            (bgColor[special], bgColor[newLocation]) = (bgColor[newLocation], bgColor[special])
         }
+        
+        print(putBgColorInFg, ans + 1, "******")
         
         colorBox.reloadData()
     }
     
-    
-    
-    var time = Timer()
     
     func progress(){
         var a : Float = 1.0
         self.timeLine.progress = a
         time = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true, block: { (timer) in
             a -= 0.01
-            print(a)
             self.timeLine.progress = a
             if self.timeLine.progress == 0.0{
                 self.timeLine.progress = 0.0
