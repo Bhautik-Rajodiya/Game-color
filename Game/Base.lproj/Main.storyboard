@@ -202,24 +202,22 @@
                                             <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gmB-bb-lQC">
-                                                    <rect key="frame" x="54" y="56" width="42" height="38.5"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="32"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j2Y-yy-IPc">
+                                                    <rect key="frame" x="39.5" y="58.5" width="71.5" height="33.5"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="gmB-bb-lQC" firstAttribute="centerX" secondItem="bxa-eq-3Qq" secondAttribute="centerX" id="0TJ-Sc-BZP"/>
-                                                <constraint firstItem="gmB-bb-lQC" firstAttribute="centerY" secondItem="bxa-eq-3Qq" secondAttribute="centerY" id="PkN-yS-4IF"/>
-                                                <constraint firstAttribute="trailing" secondItem="gmB-bb-lQC" secondAttribute="trailing" constant="54" id="PnV-fJ-yiD"/>
-                                                <constraint firstItem="gmB-bb-lQC" firstAttribute="leading" secondItem="bxa-eq-3Qq" secondAttribute="leading" constant="54" id="gsb-NK-6Rr"/>
+                                                <constraint firstItem="j2Y-yy-IPc" firstAttribute="centerY" secondItem="bxa-eq-3Qq" secondAttribute="centerY" id="dEU-Vx-dIV"/>
+                                                <constraint firstItem="j2Y-yy-IPc" firstAttribute="centerX" secondItem="bxa-eq-3Qq" secondAttribute="centerX" id="rnc-4N-bSl"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <size key="customSize" width="150" height="150"/>
                                         <connections>
-                                            <outlet property="lb" destination="gmB-bb-lQC" id="Cff-Rd-5sC"/>
+                                            <outlet property="lb" destination="j2Y-yy-IPc" id="jDO-LB-Ce4"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -228,17 +226,25 @@
                                     <outlet property="delegate" destination="bPO-p0-837" id="jbQ-Ht-kNy"/>
                                 </connections>
                             </collectionView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="aat-hC-OAm">
+                                <rect key="frame" x="20" y="351" width="374" height="4"/>
+                            </progressView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jx0-uQ-EfA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="aat-hC-OAm" firstAttribute="leading" secondItem="jx0-uQ-EfA" secondAttribute="leading" constant="20" id="MP5-Il-TlR"/>
+                            <constraint firstItem="aat-hC-OAm" firstAttribute="centerX" secondItem="XGQ-Bs-nVN" secondAttribute="centerX" id="SI6-js-ZXM"/>
+                            <constraint firstItem="zGT-Ec-MSa" firstAttribute="top" secondItem="aat-hC-OAm" secondAttribute="bottom" constant="113" id="SSj-bG-A8h"/>
                             <constraint firstItem="jx0-uQ-EfA" firstAttribute="trailing" secondItem="zGT-Ec-MSa" secondAttribute="trailing" constant="20" id="U0B-Aj-lEu"/>
                             <constraint firstItem="jx0-uQ-EfA" firstAttribute="bottom" secondItem="zGT-Ec-MSa" secondAttribute="bottom" constant="20" id="fXG-AZ-3zp"/>
+                            <constraint firstItem="jx0-uQ-EfA" firstAttribute="trailing" secondItem="aat-hC-OAm" secondAttribute="trailing" constant="20" id="jpT-iA-4to"/>
                             <constraint firstItem="zGT-Ec-MSa" firstAttribute="leading" secondItem="jx0-uQ-EfA" secondAttribute="leading" constant="20" id="jzh-fA-Nez"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="colorBox" destination="zGT-Ec-MSa" id="nE8-xZ-4wM"/>
+                        <outlet property="timeLine" destination="aat-hC-OAm" id="wDt-6d-UTn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="azt-4Z-U08" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
