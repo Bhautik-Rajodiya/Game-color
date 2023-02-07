@@ -57,6 +57,15 @@ extension ViewController3 : UICollectionViewDelegate,UICollectionViewDataSource,
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         logic()
+        
+        let cell = colorBox.cellForItem(at: indexPath) as! MyCollectionViewCell
+        
+        if let labelText = cell.lb.text {
+            print(labelText)
+        } else {
+            print("Label text is nil")
+        }
+        
     }
 }
  
@@ -97,7 +106,7 @@ extension ViewController3 {
             (bgColor[special], bgColor[newLocation]) = (bgColor[newLocation], bgColor[special])
         }
         
-        print(putBgColorInFg, ans + 1, "******")
+        print(putBgColorInFg)
         
         colorBox.reloadData()
     }
@@ -110,8 +119,6 @@ extension ViewController3 {
             a -= 0.01
             self.timeLine.progress = a
             if self.timeLine.progress == 0.0{
-                self.timeLine.progress = 0.0
-                self.timeLine.isHidden = true
                 self.time.invalidate()
             }
         })
