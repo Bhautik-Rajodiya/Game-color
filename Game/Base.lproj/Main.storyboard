@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -229,6 +230,16 @@
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="aat-hC-OAm">
                                 <rect key="frame" x="20" y="351" width="374" height="4"/>
                             </progressView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sb4-8O-e7W">
+                                <rect key="frame" x="157" y="164" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="FXB-9c-WwF"/>
+                                    <constraint firstAttribute="height" constant="100" id="OVf-pK-7Rf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="42"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jx0-uQ-EfA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -240,20 +251,71 @@
                             <constraint firstItem="jx0-uQ-EfA" firstAttribute="bottom" secondItem="zGT-Ec-MSa" secondAttribute="bottom" constant="20" id="fXG-AZ-3zp"/>
                             <constraint firstItem="jx0-uQ-EfA" firstAttribute="trailing" secondItem="aat-hC-OAm" secondAttribute="trailing" constant="20" id="jpT-iA-4to"/>
                             <constraint firstItem="zGT-Ec-MSa" firstAttribute="leading" secondItem="jx0-uQ-EfA" secondAttribute="leading" constant="20" id="jzh-fA-Nez"/>
+                            <constraint firstItem="Sb4-8O-e7W" firstAttribute="centerX" secondItem="XGQ-Bs-nVN" secondAttribute="centerX" id="ppO-XQ-CuP"/>
+                            <constraint firstItem="Sb4-8O-e7W" firstAttribute="top" secondItem="jx0-uQ-EfA" secondAttribute="top" constant="120" id="z0i-BT-AZC"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="colorBox" destination="zGT-Ec-MSa" id="nE8-xZ-4wM"/>
+                        <outlet property="hightestScroe" destination="AKe-qS-z0P" id="cPU-xj-BG0"/>
+                        <outlet property="popupView" destination="DAT-Fu-9CF" id="6EV-uL-pXE"/>
+                        <outlet property="rePlayButton" destination="Dqc-mB-OlI" id="ugk-T7-N8r"/>
+                        <outlet property="scroeLabel" destination="Sb4-8O-e7W" id="mSl-Mj-thZ"/>
+                        <outlet property="scroeLableInPopup" destination="1QU-HP-u3o" id="bzv-he-qlr"/>
                         <outlet property="timeLine" destination="aat-hC-OAm" id="wDt-6d-UTn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="azt-4Z-U08" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="DAT-Fu-9CF">
+                    <rect key="frame" x="0.0" y="0.0" width="298" height="376"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Game Over" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0p-fT-CsV">
+                            <rect key="frame" x="49" y="32" width="207" height="61"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="29"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score : " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1QU-HP-u3o">
+                            <rect key="frame" x="49" y="116" width="207" height="48"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Highest Score : " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AKe-qS-z0P">
+                            <rect key="frame" x="49" y="214" width="207" height="48"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dqc-mB-OlI">
+                            <rect key="frame" x="116" y="314" width="67" height="51"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain">
+                                <imageReference key="image" image="repeat" catalog="system" symbolScale="large"/>
+                                <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" scale="default"/>
+                                <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </buttonConfiguration>
+                            <connections>
+                                <action selector="rePlayButtonAction:" destination="bPO-p0-837" eventType="touchUpInside" id="whc-Y5-9Fd"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="7Df-Ru-ydT"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="2369.5652173913045" y="83.705357142857139"/>
         </scene>
     </scenes>
     <resources>
         <image name="1" width="1080" height="1920"/>
+        <image name="repeat" catalog="system" width="128" height="98"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

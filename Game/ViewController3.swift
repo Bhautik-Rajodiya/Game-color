@@ -11,6 +11,11 @@ class ViewController3: UIViewController {
     
     @IBOutlet weak var timeLine: UIProgressView!
     @IBOutlet weak var colorBox: UICollectionView!
+    @IBOutlet var popupView: UIView!
+    @IBOutlet weak var scroeLabel: UILabel!
+    @IBOutlet weak var scroeLableInPopup: UILabel!
+    @IBOutlet weak var hightestScroe: UILabel!
+    @IBOutlet weak var rePlayButton: UIButton!
     
     var fgColor = ["Red","Black","Blue","Orenge","Green","Purple","Yellow","Brown","Cyan"]
     var bgColor = ["Red","Black","Blue","Orenge","Green","Purple","Yellow","Brown","Cyan"]
@@ -21,6 +26,7 @@ class ViewController3: UIViewController {
         "Orenge" : UIColor.orange,"Green" : UIColor.green,"Purple" : UIColor.purple,
         "Yellow" : UIColor.yellow,"Brown" : UIColor.brown,"Cyan" : UIColor.cyan
     ]
+    var scroe = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +34,16 @@ class ViewController3: UIViewController {
         timeLine.progress = 1.0
         progress()
         colorBox.layer.cornerRadius = 30
+        scroeLableSetUp()
+       
+    }
+    @IBAction func rePlayButtonAction(_ sender: UIButton) {
+        view.layer.backgroundColor = UIColor.white.cgColor
+        popupView.isHidden = true
+        progress()
+        logic()
+        //scroeLableInPopup.text = "Score : \(Int(scroeLabel.text!))"
+
     }
 }
 
@@ -56,16 +72,22 @@ extension ViewController3 : UICollectionViewDelegate,UICollectionViewDataSource,
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        logic()
         
-        let cell = colorBox.cellForItem(at: indexPath) as! MyCollectionViewCell
+        let selectedCellLable = fgColor[indexPath.item]
+        let selectedCellBgColor = bgColor[indexPath.item]
         
-        if let labelText = cell.lb.text {
-            print(labelText)
-        } else {
-            print("Label text is nil")
+        if selectedCellLable == selectedCellBgColor {
+            time.invalidate()
+            progress()
+            scroe += 1
+            scroeLabel.text = "\(Int(scroe))"
         }
-        
+        else {
+            time.invalidate()
+            animationIn(desiredView: popupView)
+            scroeLableInPopup.text = "Score : \(Int(scroeLabel.text!))"
+        }
+        logic()
     }
 }
  
@@ -107,10 +129,17 @@ extension ViewController3 {
         }
         
         print(putBgColorInFg)
-        
         colorBox.reloadData()
+        
     }
-    
+    func scroeLableSetUp(){
+        scroeLabel.layer.cornerRadius = 10
+        scroeLabel.layer.backgroundColor = UIColor.lightGray.cgColor
+        scroeLabel.layer.shadowRadius = 5
+        scroeLabel.layer.shadowColor = UIColor.gray.cgColor
+        scroeLabel.layer.shadowOpacity = 1.0
+        scroeLabel.layer.shadowOffset = CGSize(width: 3, height: 3)
+    }
     
     func progress(){
         var a : Float = 1.0
@@ -118,9 +147,26 @@ extension ViewController3 {
         time = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true, block: { (timer) in
             a -= 0.01
             self.timeLine.progress = a
-            if self.timeLine.progress == 0.0{
-                self.time.invalidate()
-            }
+            print(self.timeLine.progress)
+           
         })
+        if self.timeLine.progress == 0.0{
+            self.time.invalidate()
+        }
+    }
+    
+    
+    func animationIn(desiredView: UIView){
+        view.addSubview(desiredView)
+        view.layer.backgroundColor = UIColor.lightGray.cgColor
+        desiredView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        desiredView.alpha = 0
+        desiredView.center = view .center
+        UIView.animate(withDuration: 0.3, animations: {
+            desiredView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            desiredView.alpha = 1
+        })
+        popupView.layer.cornerRadius = 20
+        popupView.isHidden = false
     }
 }
