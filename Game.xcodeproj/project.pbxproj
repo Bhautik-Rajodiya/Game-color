@@ -16,6 +16,7 @@
 		D3AF0C3C298D806C00A69978 /* ViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AF0C3B298D806C00A69978 /* ViewController2.swift */; };
 		D3AF0C40298DAD3900A69978 /* MyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AF0C3F298DAD3900A69978 /* MyCollectionViewCell.swift */; };
 		D3AF0C42298DB01200A69978 /* ViewController3.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AF0C41298DB01200A69978 /* ViewController3.swift */; };
+		E8A6730329927AAB008FB1A5 /* PopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A6730229927AAB008FB1A5 /* PopUpView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		D3AF0C3B298D806C00A69978 /* ViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController2.swift; sourceTree = "<group>"; };
 		D3AF0C3F298DAD3900A69978 /* MyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionViewCell.swift; sourceTree = "<group>"; };
 		D3AF0C41298DB01200A69978 /* ViewController3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController3.swift; sourceTree = "<group>"; };
+		E8A6730229927AAB008FB1A5 /* PopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				D3AF0C27298D7AFB00A69978 /* AppDelegate.swift */,
 				D3AF0C29298D7AFB00A69978 /* SceneDelegate.swift */,
 				D3AF0C3B298D806C00A69978 /* ViewController2.swift */,
+				E8A6730229927AAB008FB1A5 /* PopUpView.swift */,
 				D3AF0C3F298DAD3900A69978 /* MyCollectionViewCell.swift */,
 				D3AF0C41298DB01200A69978 /* ViewController3.swift */,
 				D3AF0C2B298D7AFB00A69978 /* ViewController.swift */,
@@ -147,6 +150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8A6730329927AAB008FB1A5 /* PopUpView.swift in Sources */,
 				D3AF0C2C298D7AFB00A69978 /* ViewController.swift in Sources */,
 				D3AF0C40298DAD3900A69978 /* MyCollectionViewCell.swift in Sources */,
 				D3AF0C42298DB01200A69978 /* ViewController3.swift in Sources */,

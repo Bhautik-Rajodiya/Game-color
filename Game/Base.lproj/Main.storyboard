@@ -257,60 +257,89 @@
                     </view>
                     <connections>
                         <outlet property="colorBox" destination="zGT-Ec-MSa" id="nE8-xZ-4wM"/>
-                        <outlet property="hightestScroe" destination="AKe-qS-z0P" id="cPU-xj-BG0"/>
-                        <outlet property="popupView" destination="DAT-Fu-9CF" id="6EV-uL-pXE"/>
-                        <outlet property="rePlayButton" destination="Dqc-mB-OlI" id="ugk-T7-N8r"/>
                         <outlet property="scroeLabel" destination="Sb4-8O-e7W" id="mSl-Mj-thZ"/>
-                        <outlet property="scroeLableInPopup" destination="1QU-HP-u3o" id="bzv-he-qlr"/>
                         <outlet property="timeLine" destination="aat-hC-OAm" id="wDt-6d-UTn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="azt-4Z-U08" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleToFill" id="DAT-Fu-9CF">
-                    <rect key="frame" x="0.0" y="0.0" width="298" height="376"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Game Over" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0p-fT-CsV">
-                            <rect key="frame" x="49" y="32" width="207" height="61"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="29"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Score : " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1QU-HP-u3o">
-                            <rect key="frame" x="49" y="116" width="207" height="48"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Highest Score : " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AKe-qS-z0P">
-                            <rect key="frame" x="49" y="214" width="207" height="48"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dqc-mB-OlI">
-                            <rect key="frame" x="116" y="314" width="67" height="51"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain">
-                                <imageReference key="image" image="repeat" catalog="system" symbolScale="large"/>
-                                <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" scale="default"/>
-                                <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </buttonConfiguration>
-                            <connections>
-                                <action selector="rePlayButtonAction:" destination="bPO-p0-837" eventType="touchUpInside" id="whc-Y5-9Fd"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <viewLayoutGuide key="safeArea" id="7Df-Ru-ydT"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                </view>
             </objects>
             <point key="canvasLocation" x="2369.5652173913045" y="83.705357142857139"/>
+        </scene>
+        <!--Pop Up View-->
+        <scene sceneID="xu0-nV-VPs">
+            <objects>
+                <viewController storyboardIdentifier="PopUpView" modalPresentationStyle="overCurrentContext" id="tLU-qY-kqQ" customClass="PopUpView" customModule="Game" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pTf-gw-FFi">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zEm-CX-yo5">
+                                <rect key="frame" x="30" y="271" width="354" height="354"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="41" translatesAutoresizingMaskIntoConstraints="NO" id="xFa-lv-miK">
+                                        <rect key="frame" x="10" y="10" width="334" height="334"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Over" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0p-fT-CsV">
+                                                <rect key="frame" x="93.5" y="0.0" width="147" height="53"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="29"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score : " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1QU-HP-u3o">
+                                                <rect key="frame" x="128.5" y="94" width="77" height="52.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Highest Score : " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AKe-qS-z0P">
+                                                <rect key="frame" x="85.5" y="187.5" width="163.5" height="53"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dqc-mB-OlI">
+                                                <rect key="frame" x="144.5" y="281.5" width="45.5" height="52.5"/>
+                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain">
+                                                    <imageReference key="image" image="repeat" catalog="system" symbolScale="large"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" scale="default"/>
+                                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="rePlayButtonAction:" destination="tLU-qY-kqQ" eventType="touchUpInside" id="Ni5-qB-KJI"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="xFa-lv-miK" firstAttribute="top" secondItem="zEm-CX-yo5" secondAttribute="top" constant="10" id="0K9-Cv-7Vl"/>
+                                    <constraint firstAttribute="trailing" secondItem="xFa-lv-miK" secondAttribute="trailing" constant="10" id="2Pm-pf-swm"/>
+                                    <constraint firstAttribute="bottom" secondItem="xFa-lv-miK" secondAttribute="bottom" constant="10" id="fdr-ha-I7n"/>
+                                    <constraint firstItem="xFa-lv-miK" firstAttribute="leading" secondItem="zEm-CX-yo5" secondAttribute="leading" constant="10" id="gKV-sb-27w"/>
+                                    <constraint firstAttribute="width" secondItem="zEm-CX-yo5" secondAttribute="height" id="lAo-Ve-a4x"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="A5g-GX-hPX"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="zEm-CX-yo5" firstAttribute="centerX" secondItem="pTf-gw-FFi" secondAttribute="centerX" id="He9-zj-fR4"/>
+                            <constraint firstItem="zEm-CX-yo5" firstAttribute="leading" secondItem="A5g-GX-hPX" secondAttribute="leading" constant="30" id="j4j-uF-JRo"/>
+                            <constraint firstItem="zEm-CX-yo5" firstAttribute="centerY" secondItem="pTf-gw-FFi" secondAttribute="centerY" id="jf0-PH-Vam"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="hightestScroe" destination="AKe-qS-z0P" id="MaV-Pg-YzB"/>
+                        <outlet property="rePlayButton" destination="Dqc-mB-OlI" id="nKk-Xl-0za"/>
+                        <outlet property="scroeLableInPopup" destination="1QU-HP-u3o" id="m6a-Dd-aik"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iEV-ri-kry" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3091" y="84"/>
         </scene>
     </scenes>
     <resources>

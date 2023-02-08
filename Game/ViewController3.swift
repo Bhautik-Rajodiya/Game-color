@@ -11,11 +11,9 @@ class ViewController3: UIViewController {
     
     @IBOutlet weak var timeLine: UIProgressView!
     @IBOutlet weak var colorBox: UICollectionView!
-    @IBOutlet var popupView: UIView!
+   
     @IBOutlet weak var scroeLabel: UILabel!
-    @IBOutlet weak var scroeLableInPopup: UILabel!
-    @IBOutlet weak var hightestScroe: UILabel!
-    @IBOutlet weak var rePlayButton: UIButton!
+
     
     var fgColor = ["Red","Black","Blue","Orenge","Green","Purple","Yellow","Brown","Cyan"]
     var bgColor = ["Red","Black","Blue","Orenge","Green","Purple","Yellow","Brown","Cyan"]
@@ -27,23 +25,25 @@ class ViewController3: UIViewController {
         "Yellow" : UIColor.yellow,"Brown" : UIColor.brown,"Cyan" : UIColor.cyan
     ]
     var scroe = 0
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
+        reloadData()
+       
+    }
+    
+    
+    
+    func reloadData() {
         logic()
         timeLine.progress = 1.0
         progress()
         colorBox.layer.cornerRadius = 30
         scroeLableSetUp()
-       
-    }
-    @IBAction func rePlayButtonAction(_ sender: UIButton) {
-        view.layer.backgroundColor = UIColor.white.cgColor
-        popupView.isHidden = true
-        progress()
-        logic()
-        //scroeLableInPopup.text = "Score : \(Int(scroeLabel.text!))"
-
+        scroe = 0
+        colorBox.reloadData()
+        
+        self.view.isUserInteractionEnabled = true
     }
 }
 
@@ -59,7 +59,9 @@ extension ViewController3 : UICollectionViewDelegate,UICollectionViewDataSource,
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        scroeLabel.text = "\(Int(scroe))"
         let cell = colorBox.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MyCollectionViewCell
+        
         cell.layer.cornerRadius = 10
         cell.lb.text = fgColor[indexPath.row]
         cell.layer.backgroundColor = colorHelper[bgColor[indexPath.row]]?.cgColor
@@ -75,23 +77,20 @@ extension ViewController3 : UICollectionViewDelegate,UICollectionViewDataSource,
         
         let selectedCellLable = fgColor[indexPath.item]
         let selectedCellBgColor = bgColor[indexPath.item]
-        
         if selectedCellLable == selectedCellBgColor {
             time.invalidate()
             progress()
             scroe += 1
-            scroeLabel.text = "\(Int(scroe))"
         }
         else {
             time.invalidate()
-            animationIn(desiredView: popupView)
-            scroeLableInPopup.text = "Score : \(Int(scroeLabel.text!))"
+            animationIn()
+//            scroeLableInPopup.text = "Score : \(Int(scroeLabel.text!))"
         }
         logic()
     }
 }
  
-
 extension ViewController3 {
     
     func logic(){
@@ -132,6 +131,7 @@ extension ViewController3 {
         colorBox.reloadData()
         
     }
+    
     func scroeLableSetUp(){
         scroeLabel.layer.cornerRadius = 10
         scroeLabel.layer.backgroundColor = UIColor.lightGray.cgColor
@@ -147,26 +147,21 @@ extension ViewController3 {
         time = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true, block: { (timer) in
             a -= 0.01
             self.timeLine.progress = a
-            print(self.timeLine.progress)
-           
+            if self.timeLine.progress == 0.0{
+                self.time.invalidate()
+                self.animationIn()
+//                self.scroeLableInPopup.text = "Score : \(self.scroeLabel.text!)"
+            }
         })
-        if self.timeLine.progress == 0.0{
-            self.time.invalidate()
-        }
+        
     }
     
     
-    func animationIn(desiredView: UIView){
-        view.addSubview(desiredView)
-        view.layer.backgroundColor = UIColor.lightGray.cgColor
-        desiredView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-        desiredView.alpha = 0
-        desiredView.center = view .center
-        UIView.animate(withDuration: 0.3, animations: {
-            desiredView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-            desiredView.alpha = 1
-        })
-        popupView.layer.cornerRadius = 20
-        popupView.isHidden = false
+    func animationIn(){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "PopUpView") as! PopUpView
+        vc.reload = reloadData
+        self.present(vc, animated: false)
     }
 }
+
+
