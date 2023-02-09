@@ -24,17 +24,20 @@ class ViewController2: UIViewController {
     }
 
     @IBAction func easyButtonAction(_ sender: UIButton) {
-        neviget()
+        neviget(time: 300)
     }
     
     @IBAction func mediumButtonAction(_ sender: UIButton) {
+        neviget(time: 200)
     }
     
     @IBAction func hardButtonAction(_ sender: UIButton) {
+        neviget(time: 100)
     }
     
-    func neviget(){
+    func neviget(time: Float){
         let abc = storyboard?.instantiateViewController(withIdentifier: "ViewController3") as! ViewController3
+        abc.timeAcsept = time
         navigationController?.pushViewController(abc, animated: true)
     }
 }

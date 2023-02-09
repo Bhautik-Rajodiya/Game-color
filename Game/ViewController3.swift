@@ -9,6 +9,9 @@ import UIKit
 
 class ViewController3: UIViewController {
     
+    @IBOutlet weak var hart1: UIButton!
+    @IBOutlet weak var hart2: UIButton!
+    @IBOutlet weak var hart3: UIButton!
     @IBOutlet weak var timeLine: UIProgressView!
     @IBOutlet weak var colorBox: UICollectionView!
    
@@ -25,7 +28,7 @@ class ViewController3: UIViewController {
         "Yellow" : UIColor.yellow,"Brown" : UIColor.brown,"Cyan" : UIColor.cyan
     ]
     var scroe = 0
-   
+    var timeAcsept: Float = 0.0
     override func viewDidLoad() {
         super.viewDidLoad()
         reloadData()
@@ -74,18 +77,39 @@ extension ViewController3 : UICollectionViewDelegate,UICollectionViewDataSource,
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        var count = 3
         let selectedCellLable = fgColor[indexPath.item]
         let selectedCellBgColor = bgColor[indexPath.item]
         if selectedCellLable == selectedCellBgColor {
             time.invalidate()
             progress()
             scroe += 1
+            return
+        }
+        
+        if selectedCellLable != selectedCellBgColor {
+            time.invalidate()
+            progress()
+            let img1 = UIImage(systemName: "suit.heart")
+            hart1.setImage(img1, for: .normal)
+            count -= 1
+        }
+        else if count == 2{
+            time.invalidate()
+            progress()
+            let img2 = UIImage(systemName: "suit.heart")
+            hart2.setImage(img2, for: .normal)
+            count -= 1
+        }
+        else if count == 1{
+            time.invalidate()
+            progress()
+            let img3 = UIImage(systemName: "suit.heart")
+            hart3.setImage(img3, for: .normal)
         }
         else {
             time.invalidate()
             animationIn()
-//            scroeLableInPopup.text = "Score : \(Int(scroeLabel.text!))"
         }
         logic()
     }
@@ -127,6 +151,7 @@ extension ViewController3 {
             (bgColor[special], bgColor[newLocation]) = (bgColor[newLocation], bgColor[special])
         }
         
+        
         print(putBgColorInFg)
         colorBox.reloadData()
         
@@ -142,15 +167,14 @@ extension ViewController3 {
     }
     
     func progress(){
-        var a : Float = 1.0
-        self.timeLine.progress = a
+        var a = timeAcsept
+        self.timeLine.progress = 1
         time = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true, block: { (timer) in
-            a -= 0.01
-            self.timeLine.progress = a
-            if self.timeLine.progress == 0.0{
+            a -= 1
+            self.timeLine.progress = a/self.timeAcsept
+            if a <= 0 {
                 self.time.invalidate()
                 self.animationIn()
-//                self.scroeLableInPopup.text = "Score : \(self.scroeLabel.text!)"
             }
         })
         
@@ -160,6 +184,9 @@ extension ViewController3 {
     func animationIn(){
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "PopUpView") as! PopUpView
         vc.reload = reloadData
+        vc.scoreTranfar = scroe
+        vc.myNav = navigationController
+        
         self.present(vc, animated: false)
     }
 }
