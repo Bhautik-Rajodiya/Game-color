@@ -16,7 +16,6 @@ class PopUpView: UIViewController {
     @IBOutlet weak var rePlayButton: UIButton!
     @IBOutlet weak var homeButton: UIButton!
     var scoreTranfar = 0
-    var hightestscoreTranfar = 0
     var reload : (()->())?
     var myNav : UINavigationController?
     
@@ -24,10 +23,11 @@ class PopUpView: UIViewController {
         super.viewDidLoad()
         popSetUp()
         buttunSetUp()
-        scoreSetUp()
         view.alpha = 0
         scroeLableInPopup.text = "Score : \(scoreTranfar)"
+        abc()
     }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -35,24 +35,28 @@ class PopUpView: UIViewController {
             self.view.alpha = 1
         }
     }
+    
+    func abc() {
+        let oldValue = UserDefaults.standard.integer(forKey: "score")
+        print(oldValue)
+        if oldValue <= scoreTranfar {
+            UserDefaults.standard.set(scoreTranfar, forKey: "score")
+            hightestScroe.text = "Highest Score : \(scoreTranfar)"
+        }
+        else {
+            hightestScroe.text = "Highest Score : \(oldValue)"
+        }
+    }
 
     @IBAction func rePlayButtonAction(_ sender: UIButton) {
         view.layer.backgroundColor = UIColor.white.cgColor
         reload?()
-        scoreSetUp()
         self.dismiss(animated: false)
     }
     
     @IBAction func homeButtonAction(_ sender: UIButton) {
         myNav?.popViewController(animated: true)
         self.dismiss(animated: false)
-    }
-    
-    func scoreSetUp() {
-        if hightestscoreTranfar <= scoreTranfar {
-            let hightestscoreTranfar1 = scoreTranfar
-            hightestScroe.text = "Highest Score : \(hightestscoreTranfar1)"
-        }
     }
     
     func popSetUp(){

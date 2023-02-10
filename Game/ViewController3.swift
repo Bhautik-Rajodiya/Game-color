@@ -14,13 +14,14 @@ class ViewController3: UIViewController {
     @IBOutlet weak var hart3: UIButton!
     @IBOutlet weak var timeLine: UIProgressView!
     @IBOutlet weak var colorBox: UICollectionView!
-   
+    
     @IBOutlet weak var scroeLabel: UILabel!
-
+    
     
     var fgColor = ["Red","Black","Blue","Orenge","Green","Purple","Yellow","Brown","Cyan"]
     var bgColor = ["Red","Black","Blue","Orenge","Green","Purple","Yellow","Brown","Cyan"]
     var time = Timer()
+    var count = 3
     
     let colorHelper :[String : UIColor] = [
         "Red" : UIColor.red,"Black" : UIColor.black,"Blue" : UIColor.blue,
@@ -28,14 +29,12 @@ class ViewController3: UIViewController {
         "Yellow" : UIColor.yellow,"Brown" : UIColor.brown,"Cyan" : UIColor.cyan
     ]
     var scroe = 0
+    var highScroe = 0
     var timeAcsept: Float = 0.0
     override func viewDidLoad() {
         super.viewDidLoad()
         reloadData()
-       
     }
-    
-    
     
     func reloadData() {
         logic()
@@ -45,7 +44,10 @@ class ViewController3: UIViewController {
         scroeLableSetUp()
         scroe = 0
         colorBox.reloadData()
-        
+        count = 3
+        hart1.setImage(UIImage(systemName: "suit.heart.fill"), for: .normal)
+        hart2.setImage(UIImage(systemName: "suit.heart.fill"), for: .normal)
+        hart3.setImage(UIImage(systemName: "suit.heart.fill"), for: .normal)
         self.view.isUserInteractionEnabled = true
     }
 }
@@ -77,44 +79,44 @@ extension ViewController3 : UICollectionViewDelegate,UICollectionViewDataSource,
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        var count = 3
+        
         let selectedCellLable = fgColor[indexPath.item]
         let selectedCellBgColor = bgColor[indexPath.item]
         if selectedCellLable == selectedCellBgColor {
             time.invalidate()
             progress()
             scroe += 1
-            return
-        }
-        
-        if selectedCellLable != selectedCellBgColor {
-            time.invalidate()
-            progress()
-            let img1 = UIImage(systemName: "suit.heart")
-            hart1.setImage(img1, for: .normal)
-            count -= 1
-        }
-        else if count == 2{
-            time.invalidate()
-            progress()
-            let img2 = UIImage(systemName: "suit.heart")
-            hart2.setImage(img2, for: .normal)
-            count -= 1
-        }
-        else if count == 1{
-            time.invalidate()
-            progress()
-            let img3 = UIImage(systemName: "suit.heart")
-            hart3.setImage(img3, for: .normal)
+            //return
         }
         else {
+            print(count)
+            count -= 1
             time.invalidate()
-            animationIn()
+            
+//            let img1 = UIImage(systemName: "suit.heart")
+//            hart1.setImage(img1, for: .normal)
+            print(count)
+            if count == 2{
+                progress()
+                let img1 = UIImage(systemName: "suit.heart")
+                hart1.setImage(img1, for: .normal)
+            }
+            else if count == 1{
+                progress()
+                let img2 = UIImage(systemName: "suit.heart")
+                hart2.setImage(img2, for: .normal)
+            }
+            else {
+                let img3 = UIImage(systemName: "suit.heart")
+                hart3.setImage(img3, for: .normal)
+                animationIn()
+            }
+            
         }
         logic()
     }
 }
- 
+
 extension ViewController3 {
     
     func logic(){
@@ -137,7 +139,7 @@ extension ViewController3 {
         
         let ans = (0 ..< 9).randomElement()!
         let putBgColorInFg = bgColor[ans]
-//        let j = (0..<9).first(where: { ind in  fgColor[ind] == putBgColorInFg })!
+        //        let j = (0..<9).first(where: { ind in  fgColor[ind] == putBgColorInFg })!
         let newLocation = fgColor.firstIndex(of: putBgColorInFg) ?? 0
         
         
@@ -177,16 +179,14 @@ extension ViewController3 {
                 self.animationIn()
             }
         })
-        
     }
-    
-    
+ 
     func animationIn(){
+        
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "PopUpView") as! PopUpView
         vc.reload = reloadData
         vc.scoreTranfar = scroe
         vc.myNav = navigationController
-        
         self.present(vc, animated: false)
     }
 }
